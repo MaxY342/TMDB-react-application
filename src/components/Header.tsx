@@ -4,7 +4,7 @@ import { SideBar } from '../components/SideBar';
 export const Header = () => {
     return (
         <header>
-            <nav>
+            <nav className="flex items-center gap-4 bg-gray-800 p-4">
                 <SideBar />
                 <h1 className="text-2xl font-bold text-white-900">TMDB Explorer</h1>
                 <Link to="/">Home</Link>
