@@ -7,15 +7,22 @@ export const App = () => {
     <Routes>
       <Route path="/" element={<HomeView />} />
       <Route element={<MainLayout />}>
-        ${/*<Route path="/now-playing" element={<NowPlayingView />} />*/}
+        <Route path="/movies" element={<HomeView />}>
+          <Route path="category/:list-type" element={<HomeView />} />
+          <Route path="movie/:id" element={<HomeView />} />
+        </Route>
+        <Route path="/tv" element={<HomeView />}>
+          <Route path="category/:list-type" element={<HomeView />} />
+          <Route path="tv/:id" element={<HomeView />} />
+        </Route>
         <Route path="/trending" element={<TrendingView />} />
-        ${/*<Route path="/search" element={<SearchView />} />*/}
-        ${/*<Route path="/movie/:id" element={<MovieView />}>*/}
-        ${/*<Route path="credits" element={<CreditsView />} />*/}
-        ${/*<Route path="reviews" element={<ReviewsView />} />*/}
-        ${/*</Route>*/}
+        {/*<Route path="/search" element={<SearchView />} />*/}
+        {/*<Route path="/movie/:id" element={<MovieView />}>*/}
+        {/*<Route path="credits" element={<CreditsView />} />*/}
+        {/*<Route path="reviews" element={<ReviewsView />} />*/}
+        {/*</Route>*/}
       </Route>
-      ${/*<Route path="*" element={<ErrorView />} />*/}
+      {/*<Route path="*" element={<ErrorView />} />*/}
     </Routes>
   );
 };

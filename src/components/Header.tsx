@@ -8,9 +8,8 @@ export const Header = () => {
                 <SideBar />
                 <h1 className="text-2xl font-bold text-white-900">TMDB Explorer</h1>
                 <Link to="/">Home</Link>
-                <Link to="/movies">NowPlaying</Link>
-                <Link to="/tv">Search</Link>
                 <Link to="/trending">Trending</Link>
+                <Link to="/tv">Search</Link>
             </nav>
         </header>
     );
