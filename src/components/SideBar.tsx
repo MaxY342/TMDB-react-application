@@ -8,7 +8,7 @@ export const SideBar = () => {
                 <Link to="/">Home</Link>
                 <Link to="/movies">NowPlaying</Link>
                 <Link to="/tv">Search</Link>
-                <Link to="/trending">Trending</Link>
+                <Link to="/trending/movie">Trending</Link>
             </div>
             <div className="fixed inset-0 bg-black/50 opacity-0 group-hover:backdrop-blur-xs group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-40"></div>
         </div>

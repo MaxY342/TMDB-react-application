@@ -8,14 +8,14 @@ export const App = () => {
       <Route path="/" element={<HomeView />} />
       <Route element={<MainLayout />}>
         <Route path="/movies" element={<HomeView />}>
-          <Route path="category/:list-type" element={<HomeView />} />
+          <Route path="category/:listType" element={<HomeView />} />
           <Route path="movie/:id" element={<HomeView />} />
         </Route>
         <Route path="/tv" element={<HomeView />}>
-          <Route path="category/:list-type" element={<HomeView />} />
+          <Route path="category/:listType" element={<HomeView />} />
           <Route path="tv/:id" element={<HomeView />} />
         </Route>
-        <Route path="/trending" element={<TrendingView />} />
+        <Route path="/trending/:mediaType" element={<TrendingView />} />
         {/*<Route path="/search" element={<SearchView />} />*/}
         {/*<Route path="/movie/:id" element={<MovieView />}>*/}
         {/*<Route path="credits" element={<CreditsView />} />*/}
