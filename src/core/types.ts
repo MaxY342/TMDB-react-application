@@ -24,7 +24,7 @@ export type GridData = {
     }>;
   };
   
-  export type MovieRepsonse = {
+  export type MovieResponse = {
     id: number;
     title: string;
     overview: string;
@@ -40,6 +40,15 @@ export type GridData = {
         type: string;
       }>;
     };
+  };
+
+  export type MoviesResponse = {
+    results: Array<{
+      id: number;
+      original_title: string;
+      poster_path: string;
+    }>;
+    total_pages: number;
   };
   
   export type ReviewsResponse = {
