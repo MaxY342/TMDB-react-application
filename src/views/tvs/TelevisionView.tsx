@@ -1,15 +1,15 @@
 import { ImageGrid, Pagination, LinkGroup } from '@/components';
 import { TV_ENDPOINT } from '@/core/constants';
-import type { MoviesResponse } from '@/core/types';
+import type { MediaResponse } from '@/core/types';
 import { useTmdb } from '@/hooks';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-export const MoviesView = () => {
+export const TelevisionView = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState<number>(1);
-  const { listType = 'now_playing' } = useParams();
-  const { data } = useTmdb<MoviesResponse>(`${TV_ENDPOINT}/${listType}`, { page }, [page, listType]);
+  const { listType = 'airing_today' } = useParams();
+  const { data } = useTmdb<MediaResponse>(`${TV_ENDPOINT}/${listType}`, { page }, [page, listType]);
 
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id,
@@ -26,10 +26,10 @@ export const MoviesView = () => {
       <h1 className="text-3xl font-bold mb-4">Now Playing</h1>
       <LinkGroup
             options={[
-                { label: 'NowPlaying', to: '/movies/category/now_playing' },
+                { label: 'Airing Today', to: '/tv/category/airing_today' },
+                { label: 'On The Air', to: '/movies/category/on_the_air' },
                 { label: 'Popular', to: '/movies/category/popular' },
                 { label: 'Top Rated', to: '/movies/category/top_rated' },
-                { label: 'Upcoming', to: '/movies/category/upcoming' },
             ]}
         />
       <ImageGrid results={gridData} onClick={(id) => navigate(`/movie/${id}/credits`)} />
