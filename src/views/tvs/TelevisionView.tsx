@@ -14,7 +14,7 @@ export const TelevisionView = () => {
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id,
     imagePath: result.poster_path,
-    primaryText: result.original_title,
+    primaryText: result.name,
   }));
 
   if (!data) {
@@ -27,9 +27,9 @@ export const TelevisionView = () => {
       <LinkGroup
             options={[
                 { label: 'Airing Today', to: '/tv/category/airing_today' },
-                { label: 'On The Air', to: '/movies/category/on_the_air' },
-                { label: 'Popular', to: '/movies/category/popular' },
-                { label: 'Top Rated', to: '/movies/category/top_rated' },
+                { label: 'On The Air', to: '/tv/category/on_the_air' },
+                { label: 'Popular', to: '/tv/category/popular' },
+                { label: 'Top Rated', to: '/tv/category/top_rated' },
             ]}
         />
       <ImageGrid results={gridData} onClick={(id) => navigate(`/movie/${id}/credits`)} />

@@ -1,0 +1,42 @@
+import { ImageGrid, Pagination, LinkGroup } from '@/components';
+import { DISCOVER_ENDPOINT, GENRE_ENDPOINT, MOVIE_ENDPOINT } from '@/core/constants';
+import type { GenresResponse, MediaResponse, MoviesResponse } from '@/core/types';
+import { useTmdb } from '@/hooks';
+import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
+export const GenreView = () => {
+  const navigate = useNavigate();
+  const [page, setPage] = useState<number>(1);
+  const { mediaType = 'movie', genreId='0' } = useParams();
+  const { data: genresData } = useTmdb<GenresResponse>(`${GENRE_ENDPOINT}/${mediaType}/list`, {}, [mediaType]);
+  const genres = genresData?.genres ?? [];
+  const { data } = useTmdb<MediaResponse>(`${DISCOVER_ENDPOINT}/${mediaType}`, { page, with_genres: genreId }, [page, genreId, mediaType]);
+
+  const gridData = (data?.results ?? []).map((result) => ({
+    id: result.id,
+    imagePath: result.poster_path,
+    primaryText: result.original_title ?? result.name ?? '',
+  }));
+
+  if (!data) {
+    return <p className="text-center text-gray-400">Loading...</p>;
+  }
+
+  return (
+    <section className="max-w-[1200px] mx-auto p-5 space-y-5">
+      <h1 className="text-3xl font-bold mb-4">Genres</h1>
+      <LinkGroup
+        options={[
+            { label: 'movie', to: '/genre/movie/28' },
+            { label: 'tv', to: '/genre/tv/10759' },
+        ]}
+      />
+      <LinkGroup
+        options={genres.map((g) => ({ label: g.name, to: `/genre/${mediaType}/${g.id}` }))}
+      />
+      <ImageGrid results={gridData} onClick={(id) => navigate(`/movie/${id}/credits`)} />
+      <Pagination page={page} maxPages={data.total_pages} onClick={setPage} />
+    </section>
+  );
+};
