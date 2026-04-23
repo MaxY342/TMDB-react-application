@@ -10,7 +10,7 @@ type LinkGroupProps = {
 
 export const LinkGroup = ({ options }: LinkGroupProps) => {
   return (
-    <div className="flex gap-6">
+    <div className="flex gap-6 flex-wrap">
       {options.map((option) => (
         <Link key={option.label} to={option.to} match={option.match}>
           {option.label}

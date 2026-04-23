@@ -27,7 +27,6 @@ export const TrendingView = () => {
   return (
     <section className="max-w-[1200px] mx-auto p-5 space-y-5">
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-3xl font-bold">Trending</h1>
         <ButtonGroup
           value={interval}
           options={[
