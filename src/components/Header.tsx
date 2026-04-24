@@ -1,10 +1,18 @@
 import { ButtonGroup, SideBar } from "@/components";
 import { LinkGroup } from "./LinkGroup";
 import { SearchBar } from "./SearchBar";
-import { lazy, useState } from "react";
+import { useState } from "react";
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
 export const Header = () => {
-  const [query, setQuery] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchType = searchParams.get('searchType') || 'movie';
+  const query = searchParams.get('query') || '';
+  const navigate = useNavigate();
+  const onSearch = (query) => {
+    setSearchParams({ query: query})
+    navigate(`/search`);
+  }
   return (
     <header>
       <nav className="flex items-center gap-4 bg-gray-800 p-4">
@@ -44,18 +52,18 @@ export const Header = () => {
             },
           ]}
         />
-        <SearchBar value={query} onChange={setQuery} />
-        <ButtonGroup>
-          value={}
+        <SearchBar value={query} onChange={(value) => onSearch(value)} />
+        <ButtonGroup
+          value={searchType}
           options={[
             { label: "Movie", value: "movie" },
             { label: "TV", value: "tv" },
             { label: "Person", value: "person" },
           ]}
           onClick={(value) => {
-            // Handle search type change
-          }
-        </ButtonGroup>
+            setSearchParams({ searchType: value });
+          }}
+        />
       </nav>
     </header>
   );

@@ -1,14 +1,15 @@
-import { ImageGrid, Pagination, SearchBar } from '@/components';
+import { ImageGrid, Pagination } from '@/components';
 import { SEARCH_ENDPOINT } from '@/core/constants';
 import type { SearchResponse } from '@/core/types';
 import { useDebounce, useTmdb } from '@/hooks';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 export const SearchView = () => {
-  const [query, setQuery] = useState('');
   const [page, setPage] = useState<number>(1);
+  const { searchType = 'movie', query = '' } = useParams();
   const debouncedQuery = useDebounce(query, 500);
-  const { data } = useTmdb<SearchResponse>(SEARCH_ENDPOINT, { query: debouncedQuery, page }, [debouncedQuery, page]);
+  const { data } = useTmdb<SearchResponse>(`${SEARCH_ENDPOINT}/${searchType}`, { query: debouncedQuery, page }, [debouncedQuery, page]);
 
   useEffect(() => {
     setPage(1);
@@ -26,7 +27,6 @@ export const SearchView = () => {
 
   return (
     <section className="max-w-[1200px] mx-auto p-10 space-y-5">
-      <SearchBar value={query} onChange={setQuery} />
       <ImageGrid results={gridData} />
       {data.results.length ? (
         <Pagination page={page} maxPages={data.total_pages} onClick={setPage} />
