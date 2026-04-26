@@ -17,7 +17,7 @@ export const App = () => {
         </Route>
         <Route path="/trending/:mediaType" element={<TrendingView />} />
         <Route path="/genre/:mediaType/:genreId" element={<GenreView />} />
-        <Route path="/search/:searchType" element={<SearchView />} />
+        <Route path="/search" element={<SearchView />} />
         {/*<Route path="/movie/:id" element={<MovieView />}>*/}
         {/*<Route path="credits" element={<CreditsView />} />*/}
         {/*<Route path="reviews" element={<ReviewsView />} />*/}

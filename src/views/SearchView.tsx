@@ -1,15 +1,17 @@
 import { ImageGrid, Pagination } from '@/components';
 import { SEARCH_ENDPOINT } from '@/core/constants';
-import type { SearchResponse } from '@/core/types';
+import type { MediaResponse } from '@/core/types';
 import { useDebounce, useTmdb } from '@/hooks';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 export const SearchView = () => {
   const [page, setPage] = useState<number>(1);
-  const { searchType = 'movie', query = '' } = useParams();
-  const debouncedQuery = useDebounce(query, 500);
-  const { data } = useTmdb<SearchResponse>(`${SEARCH_ENDPOINT}/${searchType}`, { query: debouncedQuery, page }, [debouncedQuery, page]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const debouncedQuery = useDebounce(searchParams.get('query'), 500);
+  console.log('searchParams.get("query")', searchParams.get('query'));
+  console.log('searchParams.get("searchType")', searchParams.get('searchType'));
+  const { data } = useTmdb<MediaResponse>(`${SEARCH_ENDPOINT}/${searchParams.get('searchType')}`, { query: debouncedQuery, page }, [debouncedQuery, page, searchParams.get('searchType')]);
 
   useEffect(() => {
     setPage(1);
@@ -17,8 +19,8 @@ export const SearchView = () => {
 
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id,
-    imagePath: result.profile_path,
-    primaryText: result.name,
+    imagePath: result.profile_path || result.poster_path || null,
+    primaryText: result.name || result.original_title || '',
   }));
 
   if (!data) {

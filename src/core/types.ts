@@ -10,7 +10,8 @@ export type MediaResponse = {
     id: number;
     original_title?: string;
     name?: string;
-    poster_path: string;
+    poster_path?: string;
+    profile_path?: string;
   }>;
   total_pages: number;
 };

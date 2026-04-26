@@ -1,17 +1,20 @@
 import { ButtonGroup, SideBar } from "@/components";
 import { LinkGroup } from "./LinkGroup";
 import { SearchBar } from "./SearchBar";
+import { useSearchParams, useNavigate, useLocation } from 'react-router-dom';
 import { useState } from "react";
-import { useSearchParams, useNavigate } from 'react-router-dom';
 
 export const Header = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const searchType = searchParams.get('searchType') || 'movie';
+  const [searchParams, setSearchParams] = useSearchParams({ searchType: 'movie' });
+  const [searchType, setSearchType] = useState("movie");
   const query = searchParams.get('query') || '';
+  const location = useLocation();
   const navigate = useNavigate();
-  const onSearch = (query) => {
-    setSearchParams({ query: query})
-    navigate(`/search`);
+  const onSearch = (query: string) => {
+    navigate({
+      pathname: "/search",
+      search: `?query=${encodeURIComponent(query)}&searchType=${searchType}`,
+    });
   }
   return (
     <header>
@@ -61,7 +64,10 @@ export const Header = () => {
             { label: "Person", value: "person" },
           ]}
           onClick={(value) => {
-            setSearchParams({ searchType: value });
+            setSearchType(value);
+            if (location.pathname === "/search") {
+              setSearchParams({ query, searchType: value });
+            }
           }}
         />
       </nav>
