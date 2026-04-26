@@ -7,7 +7,7 @@ import { useSearchParams } from 'react-router-dom';
 
 export const SearchView = () => {
   const [page, setPage] = useState<number>(1);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const debouncedQuery = useDebounce(searchParams.get('query'), 500);
   console.log('searchParams.get("query")', searchParams.get('query'));
   console.log('searchParams.get("searchType")', searchParams.get('searchType'));

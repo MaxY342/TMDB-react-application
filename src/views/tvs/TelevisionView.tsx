@@ -12,9 +12,9 @@ export const TelevisionView = () => {
   const { data } = useTmdb<MediaResponse>(`${TV_ENDPOINT}/${listType}`, { page }, [page, listType]);
 
   const gridData = (data?.results ?? []).map((result) => ({
-    id: result.id,
-    imagePath: result.poster_path,
-    primaryText: result.name,
+    id: result.id || 0,
+    imagePath: result.poster_path || null,
+    primaryText: result.name || '',
   }));
 
   if (!data) {
