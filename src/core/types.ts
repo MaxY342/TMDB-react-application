@@ -5,7 +5,7 @@ export type GridData = {
   secondaryText?: string;
 };
 
-export type MediaResponse = {
+export type MediaListResponse = {
   results: Array<{
     id: number;
     original_title?: string;
@@ -25,13 +25,15 @@ export type CreditsResponse = {
   }>;
 };
 
-export type MovieResponse = {
+export type MediaResponse = {
   id: number;
-  title: string;
+  title?: string;
+  name?: string;
   overview: string;
   poster_path: string;
   backdrop_path: string;
-  release_date: string;
+  release_date?: string;
+  first_air_date?: string;
   vote_average: string;
   videos?: {
     results: Array<{
@@ -39,6 +41,13 @@ export type MovieResponse = {
       name: string;
       site: string;
       type: string;
+    }>;
+  };
+  reviews?: {
+    results: Array<{
+      id: string;
+      author: string;
+      content: string;
     }>;
   };
 };

@@ -1,6 +1,6 @@
 import { ButtonGroup, ImageGrid, LinkGroup, Pagination } from '@/components';
 import { TRENDING_ENDPOINT } from '@/core/constants';
-import type { MediaResponse } from '@/core/types';
+import type { MediaListResponse } from '@/core/types';
 import { useTmdb } from '@/hooks';
 import { useState } from 'react';
 import { useNavigate, useSearchParams, useParams } from 'react-router-dom';
@@ -12,12 +12,12 @@ export const TrendingView = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const interval = searchParams.get('interval') || 'day';
 
-  const { data } = useTmdb<MediaResponse>(`${TRENDING_ENDPOINT}/${mediaType}/${interval}`, { page, time_window: interval }, [page, interval, mediaType]);
+  const { data } = useTmdb<MediaListResponse>(`${TRENDING_ENDPOINT}/${mediaType}/${interval}`, { page, time_window: interval }, [page, interval, mediaType]);
 
   const gridData = (data?.results ?? []).map((result) => ({
-    id: result.id,
-    imagePath: result.poster_path,
-    primaryText: result.original_title || result.name,
+    id: result.id || 0,
+    imagePath: result.poster_path || '',
+    primaryText: result.original_title || result.name || '',
   }));
 
   if (!data) {

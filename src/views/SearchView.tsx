@@ -1,6 +1,6 @@
 import { ImageGrid, Pagination } from '@/components';
 import { SEARCH_ENDPOINT } from '@/core/constants';
-import type { MediaResponse } from '@/core/types';
+import type { MediaListResponse } from '@/core/types';
 import { useDebounce, useTmdb } from '@/hooks';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -11,7 +11,7 @@ export const SearchView = () => {
   const debouncedQuery = useDebounce(searchParams.get('query'), 500);
   console.log('searchParams.get("query")', searchParams.get('query'));
   console.log('searchParams.get("searchType")', searchParams.get('searchType'));
-  const { data } = useTmdb<MediaResponse>(`${SEARCH_ENDPOINT}/${searchParams.get('searchType')}`, { query: debouncedQuery, page }, [debouncedQuery, page, searchParams.get('searchType')]);
+  const { data } = useTmdb<MediaListResponse>(`${SEARCH_ENDPOINT}/${searchParams.get('searchType')}`, { query: debouncedQuery, page }, [debouncedQuery, page, searchParams.get('searchType')]);
 
   useEffect(() => {
     setPage(1);

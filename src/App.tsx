@@ -9,19 +9,23 @@ export const App = () => {
       <Route element={<MainLayout />}>
         <Route path="/movies">
           <Route path="category/:listType" element={<MoviesView />} />
-          <Route path="movie/:id" element={<HomeView />} />
+          <Route path=":id" element={<HomeView />}>
+            <Route path="credits" element={<HomeView />} />
+            <Route path="trailers" element={<HomeView />} />
+            <Route path="reviews" element={<HomeView />} />
+          </Route>
         </Route>
         <Route path="/tv">
           <Route path="category/:listType" element={<TelevisionView />} />
-          <Route path="tv/:id" element={<HomeView />} />
+          <Route path=":id" element={<HomeView />}>
+            <Route path="credits" element={<HomeView />} />
+            <Route path="trailers" element={<HomeView />} />
+            <Route path="reviews" element={<HomeView />} />
+          </Route>
         </Route>
         <Route path="/trending/:mediaType" element={<TrendingView />} />
         <Route path="/genre/:mediaType/:genreId" element={<GenreView />} />
         <Route path="/search" element={<SearchView />} />
-        {/*<Route path="/movie/:id" element={<MovieView />}>*/}
-        {/*<Route path="credits" element={<CreditsView />} />*/}
-        {/*<Route path="reviews" element={<ReviewsView />} />*/}
-        {/*</Route>*/}
       </Route>
       {/*<Route path="*" element={<ErrorView />} />*/}
     </Routes>
