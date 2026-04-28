@@ -8,7 +8,7 @@ export const MediaView = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const location = useLocation();
-  const { data } = useTmdb<MediaResponse>(`${location.pathname === '/movie' ? MOVIE_ENDPOINT : TV_ENDPOINT}/${id}`, { append_to_response: 'videos' }, [id]);
+  const { data } = useTmdb<MediaResponse>(`${location.pathname.includes('/movies') ? MOVIE_ENDPOINT : TV_ENDPOINT}/${id}`, { append_to_response: 'videos' }, [id]);
 
   const trailerVideo =
     data?.videos?.results.find(
