@@ -10,11 +10,6 @@ export const MediaView = () => {
   const location = useLocation();
   const { data } = useTmdb<MediaResponse>(`${location.pathname.includes('/movies') ? MOVIE_ENDPOINT : TV_ENDPOINT}/${id}`, { append_to_response: 'videos' }, [id]);
 
-  const trailerVideo =
-    data?.videos?.results.find(
-      (video) => video.site === 'YouTube' && video.type === 'Trailer' && video.name?.toLowerCase().includes('official')
-    ) || data?.videos?.results.find((video) => video.site === 'YouTube' && video.type === 'Trailer');
-
   if (!data) {
     return <p className="text-center text-gray-400">Loading...</p>;
   }
@@ -42,19 +37,10 @@ export const MediaView = () => {
               {data.release_date || data.first_air_date}
             </p>
             <p className="text-gray-300">{data.overview}</p>
-            {trailerVideo && (
-              <div className="aspect-video w-[50%]">
-                <iframe
-                  className="w-full h-full rounded-xl"
-                  src={`https://www.youtube.com/embed/${trailerVideo.key}`}
-                  title="Movie Trailer"
-                  allowFullScreen
-                />
-              </div>
-            )}
             <LinkGroup
               options={[
                 { label: 'Credits', to: 'credits' },
+                { label: 'Trailers', to: 'trailers' },
                 { label: 'Reviews', to: 'reviews' },
               ]}
             />

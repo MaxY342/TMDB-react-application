@@ -34,7 +34,7 @@ export const GenreView = () => {
       <LinkGroup
         options={genres.map((g) => ({ label: g.name, to: `/genre/${mediaType}/${g.id}` }))}
       />
-      <ImageGrid results={gridData} onClick={(id) => navigate(`/ ${mediaType}/${id}/credits`)} />
+      <ImageGrid results={gridData} onClick={(id) => navigate(`/${mediaType}/${id}/credits`)} />
       <Pagination page={page} maxPages={data.total_pages} onClick={setPage} />
     </section>
   );

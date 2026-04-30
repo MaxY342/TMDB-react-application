@@ -44,7 +44,7 @@ export const TrendingView = () => {
           ]}
         />
       </div>
-      <ImageGrid results={gridData} onClick={(id) => navigate(`/movies/${id}/credits`)} />
+      <ImageGrid results={gridData} onClick={(id) => navigate(`/${mediaType}/${id}/credits`)} />
       <Pagination page={page} maxPages={data.total_pages} onClick={setPage} />
     </section>
   );
