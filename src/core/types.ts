@@ -85,3 +85,25 @@ export type GenresResponse = {
     name: string;
   }>;
 };
+
+export type PersonResponse = {
+  id: number;
+  name: string;
+  profile_path: string | null;
+  place_of_birth: string;
+  birthday: string;
+  biography: string;
+  images?: {
+    profiles: Array<{
+      file_path: string;
+    }>;
+  };
+  combined_credits?: {
+    cast: Array<{
+      id: number;
+      name: string;
+      character: string;
+      profile_path: string | null;
+    }>;
+  };
+};
