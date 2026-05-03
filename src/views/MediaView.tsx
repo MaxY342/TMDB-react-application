@@ -37,13 +37,24 @@ export const MediaView = () => {
               {data.release_date || data.first_air_date}
             </p>
             <p className="text-gray-300">{data.overview}</p>
-            <LinkGroup
-              options={[
-                { label: 'Credits', to: 'credits' },
-                { label: 'Trailers', to: 'trailers' },
-                { label: 'Reviews', to: 'reviews' },
+            {location.pathname.includes('/movies') ? (
+              <LinkGroup
+                options={[
+                  { label: 'Credits', to: 'credits' },
+                  { label: 'Trailers', to: 'trailers' },
+                  { label: 'Reviews', to: 'reviews' },
               ]}
             />
+            ) : (
+              <LinkGroup
+                options={[
+                  { label: 'Seasons', to: 'seasons' },
+                  { label: 'Credits', to: 'credits' },
+                  { label: 'Trailers', to: 'trailers' },
+                  { label: 'Reviews', to: 'reviews' },
+                ]}
+              />
+            )}
             <div className="pt-4">
               <Outlet />
             </div>

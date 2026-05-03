@@ -3,15 +3,16 @@ import { SEARCH_ENDPOINT } from '@/core/constants';
 import type { MediaListResponse } from '@/core/types';
 import { useDebounce, useTmdb } from '@/hooks';
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
 export const SearchView = () => {
   const [page, setPage] = useState<number>(1);
   const [searchParams] = useSearchParams();
-  const debouncedQuery = useDebounce(searchParams.get('query'), 500);
-  console.log('searchParams.get("query")', searchParams.get('query'));
-  console.log('searchParams.get("searchType")', searchParams.get('searchType'));
-  const { data } = useTmdb<MediaListResponse>(`${SEARCH_ENDPOINT}/${searchParams.get('searchType')}`, { query: debouncedQuery, page }, [debouncedQuery, page, searchParams.get('searchType')]);
+  const searchType = searchParams.get('searchType');
+  const query = searchParams.get('query');
+  const debouncedQuery = useDebounce(query, 500);
+  const navigate = useNavigate();
+  const { data } = useTmdb<MediaListResponse>(`${SEARCH_ENDPOINT}/${searchType}`, { query: debouncedQuery, page }, [debouncedQuery, page, searchType]);
 
   useEffect(() => {
     setPage(1);
@@ -29,7 +30,7 @@ export const SearchView = () => {
 
   return (
     <section className="max-w-[1200px] mx-auto p-10 space-y-5">
-      <ImageGrid results={gridData} />
+      <ImageGrid results={gridData} onClick={(id) => navigate(`/${searchType == 'movie' ? 'movies' : searchType == 'tv' ? 'tv' : 'people'}/${id}`)} />
       {data.results.length ? (
         <Pagination page={page} maxPages={data.total_pages} onClick={setPage} />
       ) : (

@@ -7,12 +7,12 @@ import { useNavigate, useSearchParams, useParams } from 'react-router-dom';
 
 export const TrendingView = () => {
   const navigate = useNavigate();
-  const { mediaType = 'movie' } = useParams();
+  const { mediaType = 'movies' } = useParams();
   const [page, setPage] = useState<number>(1);
   const [searchParams, setSearchParams] = useSearchParams();
   const interval = searchParams.get('interval') || 'day';
 
-  const { data } = useTmdb<MediaListResponse>(`${TRENDING_ENDPOINT}/${mediaType}/${interval}`, { page, time_window: interval }, [page, interval, mediaType]);
+  const { data } = useTmdb<MediaListResponse>(`${TRENDING_ENDPOINT}/${mediaType == 'movies' ? 'movie' : 'tv'}/${interval}`, { page, time_window: interval }, [page, interval, mediaType]);
 
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id || 0,
@@ -39,7 +39,7 @@ export const TrendingView = () => {
         />
         <LinkGroup
           options={[
-            { label: 'Movies', to: '/trending/movie' },
+            { label: 'Movies', to: '/trending/movies' },
             { label: 'TV Shows', to: '/trending/tv' },
           ]}
         />

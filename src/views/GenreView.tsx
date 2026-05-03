@@ -8,10 +8,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 export const GenreView = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState<number>(1);
-  const { mediaType = 'movie', genreId='0' } = useParams();
-  const { data: genresData } = useTmdb<GenresResponse>(`${GENRE_ENDPOINT}/${mediaType}/list`, {}, [mediaType]);
+  const { mediaType = 'movies', genreId='0' } = useParams();
+  const { data: genresData } = useTmdb<GenresResponse>(`${GENRE_ENDPOINT}/${mediaType == 'movies' ? 'movie' : 'tv'}/list`, {}, [mediaType]);
   const genres = genresData?.genres ?? [];
-  const { data } = useTmdb<MediaListResponse>(`${DISCOVER_ENDPOINT}/${mediaType}`, { page, with_genres: genreId }, [page, genreId, mediaType]);
+  const { data } = useTmdb<MediaListResponse>(`${DISCOVER_ENDPOINT}/${mediaType == 'movies' ? 'movie' : 'tv'}`, { page, with_genres: genreId }, [page, genreId, mediaType]);
 
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id || 0,
@@ -27,12 +27,12 @@ export const GenreView = () => {
     <section className="max-w-[1200px] mx-auto p-5 space-y-5">
       <LinkGroup
         options={[
-            { label: 'Movie', to: '/genre/movie/28', match: ['/genre/movie/:genreId'] },
-            { label: 'Tv', to: '/genre/tv/10759', match: ['/genre/tv/:genreId'] },
+            { label: 'Movies', to: '/genre/movies/28', match: ['/genre/movies/:genreId'] },
+            { label: 'TV', to: '/genre/tv/10759', match: ['/genre/tv/:genreId'] },
         ]}
       />
       <LinkGroup
-        options={genres.map((g) => ({ label: g.name, to: `/genre/${mediaType}/${g.id}` }))}
+        options={genres.map((g) => ({ label: g.name, to: `/genre/${mediaType}/${g.id}`, match: [`/genre/${mediaType}/${g.id}`] }))}
       />
       <ImageGrid results={gridData} onClick={(id) => navigate(`/${mediaType}/${id}/credits`)} />
       <Pagination page={page} maxPages={data.total_pages} onClick={setPage} />

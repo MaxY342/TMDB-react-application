@@ -13,6 +13,7 @@ export const Link = ({ children, to, match = [] }: LinkProps) => {
 
   return (
     <NavLink
+      replace
       to={to}
       className={({ isActive }) =>
         `px-4 py-2 rounded-md transition-all duration-200 border ${

@@ -50,6 +50,13 @@ export type MediaResponse = {
       content: string;
     }>;
   };
+  seasons?: Array<{
+      id: number;
+      name: string;
+      poster_path: string | null;
+      character: string;
+      season_number: number;
+  }>;
 };
 
 export type MoviesResponse = {
@@ -106,4 +113,13 @@ export type PersonResponse = {
       profile_path: string | null;
     }>;
   };
+};
+
+export type SeasonResponse = {
+  id: number;
+  episodes: Array<{
+    id: number;
+    name: string;
+    still_path: string | null;
+  }>;
 };
