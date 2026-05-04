@@ -17,7 +17,7 @@ export const SeasonsView = () => {
     id: result.id,
     imagePath: result.poster_path,
     primaryText: result.name,
-    secondaryText: result.character,
+    secondaryText: result.air_date,
     season_number: result.season_number,
   }));
 

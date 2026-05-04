@@ -53,6 +53,7 @@ export type MediaResponse = {
   seasons?: Array<{
       id: number;
       name: string;
+      air_date: string;
       poster_path: string | null;
       character: string;
       season_number: number;
@@ -117,9 +118,13 @@ export type PersonResponse = {
 
 export type SeasonResponse = {
   id: number;
+  name: string;
   episodes: Array<{
     id: number;
     name: string;
+    air_date: string;
     still_path: string | null;
   }>;
+  air_date: string;
+  overview: string;
 };
