@@ -1,7 +1,7 @@
 export type GridData = {
-  id: number;
+  id: number | string;
   imagePath: string | null;
-  primaryText: string;
+  primaryText?: string;
   secondaryText?: string;
 };
 
@@ -109,9 +109,9 @@ export type PersonResponse = {
   combined_credits?: {
     cast: Array<{
       id: number;
-      name: string;
+      title: string;
       character: string;
-      profile_path: string | null;
+      poster_path: string | null;
     }>;
   };
 };
