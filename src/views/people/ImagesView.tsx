@@ -12,7 +12,8 @@ export const ImagesView = () => {
   );
 
   const gridData = (data?.images?.profiles ?? []).map((result) => ({
-    id: result.file_path,
+    uniqueId: result.file_path,
+    id: 0,
     imagePath: result.file_path,
   }));
 

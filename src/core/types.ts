@@ -1,5 +1,6 @@
 export type GridData = {
-  id: number | string;
+  id: number;
+  uniqueId?: string;
   imagePath: string | null;
   primaryText?: string;
   secondaryText?: string;
@@ -112,6 +113,7 @@ export type PersonResponse = {
       title: string;
       character: string;
       poster_path: string | null;
+      media_type: string;
     }>;
   };
 };
