@@ -52,7 +52,11 @@ export const GenreView = () => {
       />
       <ImageGrid
         results={gridData}
-        onClick={(id) => navigate(`/${mediaType}/${id}/credits`)}
+        onClick={(id) =>
+          navigate(
+            `/${mediaType}/${id}/${mediaType == "movies" ? "credits" : "seasons"}`,
+          )
+        }
       />
       <Pagination page={page} maxPages={data.total_pages} onClick={setPage} />
     </section>

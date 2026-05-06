@@ -38,7 +38,7 @@ export const SearchView = () => {
         results={gridData}
         onClick={(id) =>
           navigate(
-            `/${searchType == "movie" ? "movies" : searchType == "tv" ? "tv" : "people"}/${id}`,
+            `/${searchType == "movie" ? "movies" : searchType == "tv" ? "tv" : "people"}/${id}/${searchType == "movie" ? "credits" : searchType == "tv" ? "seasons" : "career"}`,
           )
         }
       />
