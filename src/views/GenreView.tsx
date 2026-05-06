@@ -1,6 +1,5 @@
 import { ImageGrid, Pagination, LinkGroup } from "@/components";
-import { DISCOVER_ENDPOINT, GENRE_ENDPOINT } from "@/core/constants";
-import type { GenresResponse, MediaListResponse } from "@/core/types";
+import { type GenresResponse, type MediaListResponse, DISCOVER_ENDPOINT, GENRE_ENDPOINT } from "@/core";
 import { useTmdb } from "@/hooks";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";

@@ -1,6 +1,6 @@
 import { FaGithub } from "react-icons/fa";
 
-export const FooterView = () => {
+export const Footer = () => {
   return (
     <footer className="flex justify-between items-center p-2">
       <p className="text-center p-4 text-sm text-gray-500 ml-100">

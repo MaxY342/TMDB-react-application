@@ -1,6 +1,4 @@
-import { ButtonGroup, SideBar } from "@/components";
-import { LinkGroup } from "./LinkGroup";
-import { SearchBar } from "./SearchBar";
+import { ButtonGroup, SideBar, LinkGroup, SearchBar } from "@/components";
 import { useSearchParams, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 

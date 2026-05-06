@@ -8,3 +8,4 @@ export * from "@/components/Modal";
 export * from "@/components/Pagination";
 export * from "@/components/SearchBar";
 export * from "@/components/SideBar";
+export * from "@/components/Footer";

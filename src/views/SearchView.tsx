@@ -1,6 +1,5 @@
 import { ImageGrid, Pagination } from "@/components";
-import { SEARCH_ENDPOINT } from "@/core/constants";
-import type { MediaListResponse } from "@/core/types";
+import { type MediaListResponse, SEARCH_ENDPOINT } from "@/core";
 import { useDebounce, useTmdb } from "@/hooks";
 import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";

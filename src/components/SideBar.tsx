@@ -1,4 +1,4 @@
-import { Link } from "../components/Link";
+import { Link } from "@/components";
 import { IoMenu } from "react-icons/io5";
 
 export const SideBar = () => {

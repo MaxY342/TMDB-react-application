@@ -1,5 +1,4 @@
-import { FooterView } from "@/components/footer";
-import { Header } from "../components/Header";
+import { Footer, Header } from "@/components";
 import { Outlet } from "react-router-dom";
 
 export const MainLayout = () => {
@@ -10,7 +9,7 @@ export const MainLayout = () => {
         <Outlet />
       </main>
       <hr className="border-gray-600" />
-      <FooterView />
+      <Footer />
     </div>
   );
 };

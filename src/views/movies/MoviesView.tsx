@@ -1,6 +1,5 @@
 import { ImageGrid, Pagination, LinkGroup } from "@/components";
-import { MOVIE_ENDPOINT } from "@/core/constants";
-import type { MoviesResponse } from "@/core/types";
+import { type MoviesResponse, MOVIE_ENDPOINT } from "@/core";
 import { useTmdb } from "@/hooks";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
