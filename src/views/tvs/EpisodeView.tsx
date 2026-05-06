@@ -2,7 +2,7 @@ import { ImageGrid } from "@/components";
 import { type SeasonResponse, TV_ENDPOINT } from "@/core";
 import { useTmdb } from "@/hooks";
 import { useParams } from "react-router-dom";
-import { FaCalendarAlt } from 'react-icons/fa';
+import { FaCalendarAlt } from "react-icons/fa";
 
 export const EpisodeView = () => {
   const { id, seasonNumber } = useParams();
@@ -32,7 +32,10 @@ export const EpisodeView = () => {
         Back
       </button>
       <h1 className="text-3xl font-bold mb-2">{data.name}</h1>
-      <p className="text-gray-400 flex items-center gap-2"><FaCalendarAlt />{data.air_date}</p>
+      <p className="text-gray-400 flex items-center gap-2">
+        <FaCalendarAlt />
+        {data.air_date}
+      </p>
       <p className="text-gray-400">{data.overview}</p>
       <h2 className="text-2xl font-bold mb-6">Episodes</h2>
       {data.episodes?.length ? (

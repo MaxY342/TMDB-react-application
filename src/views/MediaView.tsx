@@ -1,19 +1,28 @@
-import { LinkGroup, Modal } from '@/components';
-import { type MediaResponse, IMAGE_BASE_URL, MOVIE_ENDPOINT, ORIGINAL_IMAGE_BASE_URL, TV_ENDPOINT } from '@/core';
-import { useTmdb } from '@/hooks';
-import { FaCalendarAlt } from 'react-icons/fa';
-import { Outlet, useNavigate, useParams, useLocation } from 'react-router-dom';
+import { LinkGroup, Modal } from "@/components";
+import {
+  type MediaResponse,
+  IMAGE_BASE_URL,
+  MOVIE_ENDPOINT,
+  ORIGINAL_IMAGE_BASE_URL,
+  TV_ENDPOINT,
+} from "@/core";
+import { useTmdb } from "@/hooks";
+import { FaCalendarAlt } from "react-icons/fa";
+import { Outlet, useNavigate, useParams, useLocation } from "react-router-dom";
 
 export const MediaView = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const location = useLocation();
-  const { data } = useTmdb<MediaResponse>(`${location.pathname.includes('/movies') ? MOVIE_ENDPOINT : TV_ENDPOINT}/${id}`, { append_to_response: 'videos' }, [id]);
+  const { data } = useTmdb<MediaResponse>(
+    `${location.pathname.includes("/movies") ? MOVIE_ENDPOINT : TV_ENDPOINT}/${id}`,
+    { append_to_response: "videos" },
+    [id],
+  );
 
   if (!data) {
     return <p className="text-center text-gray-400">Loading...</p>;
   }
-
 
   return (
     <Modal onClick={() => navigate(-1)}>
@@ -37,21 +46,21 @@ export const MediaView = () => {
               {data.release_date || data.first_air_date}
             </p>
             <p className="text-gray-300">{data.overview}</p>
-            {location.pathname.includes('/movies') ? (
+            {location.pathname.includes("/movies") ? (
               <LinkGroup
                 options={[
-                  { label: 'Credits', to: 'credits' },
-                  { label: 'Trailers', to: 'trailers' },
-                  { label: 'Reviews', to: 'reviews' },
-              ]}
-            />
+                  { label: "Credits", to: "credits" },
+                  { label: "Trailers", to: "trailers" },
+                  { label: "Reviews", to: "reviews" },
+                ]}
+              />
             ) : (
               <LinkGroup
                 options={[
-                  { label: 'Seasons', to: 'seasons' },
-                  { label: 'Credits', to: 'credits' },
-                  { label: 'Trailers', to: 'trailers' },
-                  { label: 'Reviews', to: 'reviews' },
+                  { label: "Seasons", to: "seasons" },
+                  { label: "Credits", to: "credits" },
+                  { label: "Trailers", to: "trailers" },
+                  { label: "Reviews", to: "reviews" },
                 ]}
               />
             )}

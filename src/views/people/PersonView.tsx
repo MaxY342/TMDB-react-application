@@ -1,9 +1,5 @@
 import { LinkGroup } from "@/components";
-import {
-  type PersonResponse,
-  IMAGE_BASE_URL,
-  PERSON_ENDPOINT,
-} from "@/core";
+import { type PersonResponse, IMAGE_BASE_URL, PERSON_ENDPOINT } from "@/core";
 import { useTmdb } from "@/hooks";
 import { FaCalendarAlt } from "react-icons/fa";
 import { Outlet, useParams } from "react-router-dom";
@@ -13,7 +9,7 @@ export const PersonView = () => {
   const { data } = useTmdb<PersonResponse>(
     `${PERSON_ENDPOINT}/${id}`,
     { append_to_response: "images,combined_credits" },
-    [id]
+    [id],
   );
 
   if (!data) {

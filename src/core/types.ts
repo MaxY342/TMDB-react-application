@@ -52,12 +52,12 @@ export type MediaResponse = {
     }>;
   };
   seasons?: Array<{
-      id: number;
-      name: string;
-      air_date: string;
-      poster_path: string | null;
-      character: string;
-      season_number: number;
+    id: number;
+    name: string;
+    air_date: string;
+    poster_path: string | null;
+    character: string;
+    season_number: number;
   }>;
 };
 

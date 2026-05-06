@@ -7,11 +7,7 @@ export const SeasonsView = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const { data } = useTmdb<MediaResponse>(
-    `${TV_ENDPOINT}/${id}`,
-    {},
-    [ id ]
-  );
+  const { data } = useTmdb<MediaResponse>(`${TV_ENDPOINT}/${id}`, {}, [id]);
 
   const gridData = (data?.seasons ?? []).map((result) => ({
     id: result.id,
@@ -31,7 +27,11 @@ export const SeasonsView = () => {
       {data.seasons?.length ? (
         <ImageGrid
           results={gridData}
-          onClick={(id) => navigate(`${location.pathname}/${gridData.find((s) => s.id === id)?.season_number}`)}
+          onClick={(id) =>
+            navigate(
+              `${location.pathname}/${gridData.find((s) => s.id === id)?.season_number}`,
+            )
+          }
         />
       ) : (
         <p className="text-gray-400 text-center">No seasons available.</p>

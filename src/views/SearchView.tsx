@@ -1,18 +1,22 @@
-import { ImageGrid, Pagination } from '@/components';
-import { SEARCH_ENDPOINT } from '@/core/constants';
-import type { MediaListResponse } from '@/core/types';
-import { useDebounce, useTmdb } from '@/hooks';
-import { useEffect, useState } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
+import { ImageGrid, Pagination } from "@/components";
+import { SEARCH_ENDPOINT } from "@/core/constants";
+import type { MediaListResponse } from "@/core/types";
+import { useDebounce, useTmdb } from "@/hooks";
+import { useEffect, useState } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 export const SearchView = () => {
   const [page, setPage] = useState<number>(1);
   const [searchParams] = useSearchParams();
-  const searchType = searchParams.get('searchType');
-  const query = searchParams.get('query');
+  const searchType = searchParams.get("searchType");
+  const query = searchParams.get("query");
   const debouncedQuery = useDebounce(query, 500);
   const navigate = useNavigate();
-  const { data } = useTmdb<MediaListResponse>(`${SEARCH_ENDPOINT}/${searchType}`, { query: debouncedQuery, page }, [debouncedQuery, page, searchType]);
+  const { data } = useTmdb<MediaListResponse>(
+    `${SEARCH_ENDPOINT}/${searchType}`,
+    { query: debouncedQuery, page },
+    [debouncedQuery, page, searchType],
+  );
 
   useEffect(() => {
     setPage(1);
@@ -21,7 +25,7 @@ export const SearchView = () => {
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id,
     imagePath: result.profile_path || result.poster_path || null,
-    primaryText: result.name || result.original_title || '',
+    primaryText: result.name || result.original_title || "",
   }));
 
   if (!data) {
@@ -30,7 +34,14 @@ export const SearchView = () => {
 
   return (
     <section className="max-w-[1200px] mx-auto p-10 space-y-5">
-      <ImageGrid results={gridData} onClick={(id) => navigate(`/${searchType == 'movie' ? 'movies' : searchType == 'tv' ? 'tv' : 'people'}/${id}`)} />
+      <ImageGrid
+        results={gridData}
+        onClick={(id) =>
+          navigate(
+            `/${searchType == "movie" ? "movies" : searchType == "tv" ? "tv" : "people"}/${id}`,
+          )
+        }
+      />
       {data.results.length ? (
         <Pagination page={page} maxPages={data.total_pages} onClick={setPage} />
       ) : (

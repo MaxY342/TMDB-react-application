@@ -29,13 +29,17 @@ export const CareerView = () => {
     <section className="p-5">
       <h2 className="text-2xl font-bold mb-6">Career</h2>
       {data.combined_credits?.cast.length ? (
-        <ImageGrid results={gridData} 
-        onClick={(id) => {
-          const entry = gridData.find((item) => item.id === id);
-          if (entry) {
-            navigate(`/${entry.media_type == 'movie' ? 'movies' : 'tv'}/${id}`);
-          }
-        }} />
+        <ImageGrid
+          results={gridData}
+          onClick={(id) => {
+            const entry = gridData.find((item) => item.id === id);
+            if (entry) {
+              navigate(
+                `/${entry.media_type == "movie" ? "movies" : "tv"}/${id}/${entry.media_type == "movie" ? "credits" : "seasons"}`,
+              );
+            }
+          }}
+        />
       ) : (
         <p className="text-gray-400 text-center">
           No career entries available.

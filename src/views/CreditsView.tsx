@@ -9,7 +9,7 @@ export const CreditsView = () => {
   const { data } = useTmdb<CreditsResponse>(
     `${MOVIE_ENDPOINT}/${id}/credits`,
     {},
-    []
+    [],
   );
 
   const gridData = (data?.cast ?? []).map((result) => ({
@@ -27,9 +27,9 @@ export const CreditsView = () => {
     <section className="p-5">
       <h2 className="text-2xl font-bold mb-6">Credits</h2>
       {data.cast.length ? (
-        <ImageGrid 
+        <ImageGrid
           results={gridData}
-          onClick={(id) => navigate(`/people/${id}`)}
+          onClick={(id) => navigate(`/people/${id}/career`)}
         />
       ) : (
         <p className="text-gray-400 text-center">No credits available.</p>

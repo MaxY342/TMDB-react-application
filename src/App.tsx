@@ -1,6 +1,23 @@
-import { MainLayout } from '@/layouts/MainLayout';
-import { HomeView, TrendingView, MoviesView, TelevisionView, GenreView, SearchView, MediaView, CreditsView, ReviewsView, TrailersView, PersonView, SeasonsView, EpisodeView, ErrorView, CareerView, ImagesView } from '@/views';
-import { Route, Routes } from 'react-router-dom';
+import { MainLayout } from "@/layouts/MainLayout";
+import {
+  HomeView,
+  TrendingView,
+  MoviesView,
+  TelevisionView,
+  GenreView,
+  SearchView,
+  MediaView,
+  CreditsView,
+  ReviewsView,
+  TrailersView,
+  PersonView,
+  SeasonsView,
+  EpisodeView,
+  ErrorView,
+  CareerView,
+  ImagesView,
+} from "@/views";
+import { Route, Routes } from "react-router-dom";
 
 export const App = () => {
   return (

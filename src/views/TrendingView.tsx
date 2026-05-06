@@ -1,23 +1,27 @@
-import { ButtonGroup, ImageGrid, LinkGroup, Pagination } from '@/components';
-import { TRENDING_ENDPOINT } from '@/core/constants';
-import type { MediaListResponse } from '@/core/types';
-import { useTmdb } from '@/hooks';
-import { useState } from 'react';
-import { useNavigate, useSearchParams, useParams } from 'react-router-dom';
+import { ButtonGroup, ImageGrid, LinkGroup, Pagination } from "@/components";
+import { TRENDING_ENDPOINT } from "@/core/constants";
+import type { MediaListResponse } from "@/core/types";
+import { useTmdb } from "@/hooks";
+import { useState } from "react";
+import { useNavigate, useSearchParams, useParams } from "react-router-dom";
 
 export const TrendingView = () => {
   const navigate = useNavigate();
-  const { mediaType = 'movies' } = useParams();
+  const { mediaType = "movies" } = useParams();
   const [page, setPage] = useState<number>(1);
   const [searchParams, setSearchParams] = useSearchParams();
-  const interval = searchParams.get('interval') || 'day';
+  const interval = searchParams.get("interval") || "day";
 
-  const { data } = useTmdb<MediaListResponse>(`${TRENDING_ENDPOINT}/${mediaType == 'movies' ? 'movie' : 'tv'}/${interval}`, { page, time_window: interval }, [page, interval, mediaType]);
+  const { data } = useTmdb<MediaListResponse>(
+    `${TRENDING_ENDPOINT}/${mediaType == "movies" ? "movie" : "tv"}/${interval}`,
+    { page, time_window: interval },
+    [page, interval, mediaType],
+  );
 
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id || 0,
-    imagePath: result.poster_path || '',
-    primaryText: result.original_title || result.name || '',
+    imagePath: result.poster_path || "",
+    primaryText: result.original_title || result.name || "",
   }));
 
   if (!data) {
@@ -30,8 +34,8 @@ export const TrendingView = () => {
         <ButtonGroup
           value={interval}
           options={[
-            { label: 'Today', value: 'day' },
-            { label: 'Week', value: 'week' },
+            { label: "Today", value: "day" },
+            { label: "Week", value: "week" },
           ]}
           onClick={(value) => {
             setSearchParams({ interval: value });
@@ -39,12 +43,15 @@ export const TrendingView = () => {
         />
         <LinkGroup
           options={[
-            { label: 'Movies', to: '/trending/movies' },
-            { label: 'TV Shows', to: '/trending/tv' },
+            { label: "Movies", to: "/trending/movies" },
+            { label: "TV Shows", to: "/trending/tv" },
           ]}
         />
       </div>
-      <ImageGrid results={gridData} onClick={(id) => navigate(`/${mediaType}/${id}/credits`)} />
+      <ImageGrid
+        results={gridData}
+        onClick={(id) => navigate(`/${mediaType}/${id}/credits`)}
+      />
       <Pagination page={page} maxPages={data.total_pages} onClick={setPage} />
     </section>
   );

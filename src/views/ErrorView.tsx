@@ -1,5 +1,5 @@
-import { Button } from '@/components';
-import { useNavigate } from 'react-router-dom';
+import { Button } from "@/components";
+import { useNavigate } from "react-router-dom";
 
 export const ErrorView = () => {
   const navigate = useNavigate();

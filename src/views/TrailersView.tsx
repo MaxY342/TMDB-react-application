@@ -7,22 +7,21 @@ export const TrailersView = () => {
   const { data } = useTmdb<MediaResponse>(
     `${location.pathname.includes("/movies") ? MOVIE_ENDPOINT : TV_ENDPOINT}/${id}`,
     { append_to_response: "videos" },
-    [id]
+    [id],
   );
 
-  let trailerVideos =
-    data?.videos?.results.filter(
-      (video) =>
-        video.site === "YouTube" &&
-        video.type === "Trailer" &&
-        video.name?.toLowerCase().includes("official")
-    );
+  let trailerVideos = data?.videos?.results.filter(
+    (video) =>
+      video.site === "YouTube" &&
+      video.type === "Trailer" &&
+      video.name?.toLowerCase().includes("official"),
+  );
 
-    if (trailerVideos && trailerVideos.length < 1) {
-      trailerVideos = data?.videos?.results.filter(
-      (video) => video.site === "YouTube" && video.type === "Trailer"
+  if (trailerVideos && trailerVideos.length < 1) {
+    trailerVideos = data?.videos?.results.filter(
+      (video) => video.site === "YouTube" && video.type === "Trailer",
     );
-    }
+  }
 
   if (!data) {
     return <p className="text-center text-gray-400">Loading...</p>;

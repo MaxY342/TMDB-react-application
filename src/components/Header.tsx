@@ -1,13 +1,15 @@
 import { ButtonGroup, SideBar } from "@/components";
 import { LinkGroup } from "./LinkGroup";
 import { SearchBar } from "./SearchBar";
-import { useSearchParams, useNavigate, useLocation } from 'react-router-dom';
+import { useSearchParams, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 
 export const Header = () => {
-  const [searchParams, setSearchParams] = useSearchParams({ searchType: 'movie' });
+  const [searchParams, setSearchParams] = useSearchParams({
+    searchType: "movie",
+  });
   const [searchType, setSearchType] = useState("movie");
-  const query = searchParams.get('query') || '';
+  const query = searchParams.get("query") || "";
   const location = useLocation();
   const navigate = useNavigate();
   const onSearch = (query: string) => {
@@ -15,11 +17,11 @@ export const Header = () => {
       pathname: "/search",
       search: `?query=${encodeURIComponent(query)}&searchType=${searchType}`,
     });
-  }
+  };
   return (
     <header>
       <nav className="flex bg-gray-800 p-4 justify-between">
-        <div className='flex items-center gap-4'>
+        <div className="flex items-center gap-4">
           <SideBar />
           <h1 className="text-2xl font-bold text-white-900">TMDB Explorer</h1>
           <LinkGroup
